@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iBillPrism.Views.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout>
+        <Label
+            Margin="0,200,0,0"
+            FontSize="22"
+            HorizontalOptions="Center"
+            Text="Welcome to iBill!" />
+        <Label
+            Margin="0,10,0,0"
+            FontSize="22"
+            HorizontalOptions="Center"
+            Text="Your bills organiser" />
+        <Button
+            Margin="0,100,0,0"
+            Command="{Binding ButtonClickCommand}"
+            HorizontalOptions="Center"
+            Text="Open your bills calendar" />
+    </StackLayout>
+
+
+</ContentPage>

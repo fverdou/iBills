@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:converters="clr-namespace:iBillPrism.Converters"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="iBillPrism.Views.CalendarPage">
+    <ContentPage.Resources>
+        <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                Margin="0,20,0,0"
+                FontSize="22"
+                HorizontalOptions="Center"
+                Text="Bills Calendar" />
+            <Button
+                Margin="0,10,20,0"
+                Command="{Binding ButtonAddBillClicked}"
+                HorizontalOptions="End"
+                Text="Add Bill" />
+            <ListView              
+                SelectionMode="None"
+                RowHeight="50"
+                VerticalOptions="FillAndExpand"
+                ItemsSource="{Binding ListOfBills}">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <StackLayout Orientation="Vertical" BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
+                                <Label Text="{Binding Type}" FontSize="Medium"></Label>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                    <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
+                                    <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

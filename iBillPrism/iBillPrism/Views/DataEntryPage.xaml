@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             
+             prism:ViewModelLocator.AutowireViewModel="True"
+              
+             x:Class="iBillPrism.Views.DataEntryPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker Title="Select type of bill"
+                Margin="0,20,0,0"
+                ItemsSource="{Binding BillTypes}"
+                SelectedItem="{Binding SelectedBillType}"/>
+            <Entry Placeholder="Enter Amount"
+                Margin="0,20,0,0" 
+                Keyboard="Numeric"
+                Text="{Binding BillAmount}"/>
+            <Label Margin="5,0,0,0"
+                TextColor="Red"
+                FontSize="Small"
+                IsVisible="{Binding LabelAlertVisible}"
+                Text="{Binding LabelAlertText}"/>
+            <Frame HasShadow="False"
+                   BackgroundColor="Transparent"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Text="Due Date:"
+                           FontSize="Medium"/>
+                    <DatePicker 
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Date="{Binding SelectedDueDate}"
+                                Format="dd-MM-yyyy"
+                                MinimumDate="01-01-2000"
+                                MaximumDate="12-31-2050"/>
+                </StackLayout>
+            </Frame>
+            <Frame HasShadow="False"
+                   BackgroundColor="Transparent"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Text="Pay Date:"
+                           FontSize="Medium"/>
+                    <DatePicker 
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Date="{Binding SelectedPayDate}" 
+                                Format="dd-MM-yyyy"
+                                MinimumDate="01-01-2000"
+                                MaximumDate="12-31-2050"/>
+                </StackLayout>
+            </Frame>
+            <Frame HasShadow="False"
+                   BackgroundColor="Transparent"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Button VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding ButtonDeleteClickCommand}"
+                        Text="Delete Bill"
+                        IsEnabled="{Binding ButtonDeleteEnabled}"/>
+                    <Button VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding ButtonOkClickCommand}"
+                        Text="{Binding ButtonText}"
+                        IsEnabled="{Binding ButtonOkEnabled}"/>
+                </StackLayout>
+            </Frame>
+            <Button
+                Margin="0,20,0,0"
+                Command="{Binding ButtonCancelClickCommand}"
+                HorizontalOptions="Center"
+                Text="Cancel" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
