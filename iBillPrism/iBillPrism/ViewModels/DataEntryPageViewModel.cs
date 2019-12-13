@@ -88,7 +88,7 @@ namespace iBillPrism.ViewModels
             if (parameters.ContainsKey("bill"))
             {
                 _bill = parameters.GetValue<Bill>("bill");
-                ButtonText = "Change Bill";
+                ButtonText = "Edit Bill";
 
                 ButtonDeleteEnabled = true;
 
