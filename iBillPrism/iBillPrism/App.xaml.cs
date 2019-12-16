@@ -33,7 +33,7 @@ namespace iBillPrism
         {
             InitializeComponent();
             
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");            
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/MainPage");            
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -49,7 +49,7 @@ namespace iBillPrism
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();            
             containerRegistry.RegisterForNavigation<DataEntryPage, DataEntryPageViewModel>();
-
+            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
         }
     }
 }
