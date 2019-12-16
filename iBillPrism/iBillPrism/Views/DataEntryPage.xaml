@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
-             
+             xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
               
              x:Class="iBillPrism.Views.DataEntryPage">
+    <ContentPage.Resources>
+        <converters:BillToColorBrushConverter x:Key="DateFontColor"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Picker Title="Select type of bill"
@@ -55,7 +58,13 @@
                                 Date="{Binding SelectedPayDate}" 
                                 Format="dd-MM-yyyy"
                                 MinimumDate="01-01-2000"
-                                MaximumDate="12-31-2050"/>
+                                MaximumDate="12-31-2050"
+                        TextColor="{Binding SelectedPayDate, Converter={StaticResource DateFontColor}}"/>
+                    <Button VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding ButtonPayClickCommand}"
+                        Text="Pay Bill" 
+                        IsEnabled="{Binding ButtonPayEnabled}"/>
                 </StackLayout>
             </Frame>
             <Frame HasShadow="False"

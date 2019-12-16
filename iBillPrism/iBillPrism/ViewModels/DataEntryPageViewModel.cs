@@ -7,11 +7,23 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace iBillPrism.ViewModels
 {
+    //public enum BillKind
+    //{
+    //    [Description("Energy Bill")]
+    //    Energy,
+    //    Gas,
+    //    Telephone,
+    //    Cellphone,
+    //    Loan,
+    //}
+ 
     public class DataEntryPageViewModel : ViewModelBase
     {
+        //BillKind[] BillKinds = (BillKind[])Enum.GetValues(typeof(BillKind));
         public List<string> BillTypes { get; set; } = new List<string>
         {
             "Energy Bill", "Gas Bill", "Telephone Bill", "Cellphone Bill", "Loan bill"
@@ -41,6 +53,11 @@ namespace iBillPrism.ViewModels
             get => _buttonOkEnabled;
             set => SetProperty(ref _buttonOkEnabled, value);
         }
+        public bool ButtonPayEnabled
+        {
+            get => _buttonPayEnabled;
+            set => SetProperty(ref _buttonPayEnabled, value);
+        }
         public bool ButtonDeleteEnabled
         {
             get => _buttonDeleteEnabled;
@@ -62,6 +79,7 @@ namespace iBillPrism.ViewModels
             set => SetProperty(ref _selectedDueDate, value); 
         }
         public DelegateCommand ButtonOkClickCommand { get; }
+        public DelegateCommand ButtonPayClickCommand { get; }
         public DelegateCommand ButtonDeleteClickCommand { get; }
         public DelegateCommand ButtonCancelClickCommand { get; }
 
@@ -75,9 +93,18 @@ namespace iBillPrism.ViewModels
             SelectedDueDate = DateTime.Today;
             SelectedPayDate = null;
             ButtonOkClickCommand = new DelegateCommand(BillOk);
+            ButtonPayClickCommand = new DelegateCommand(BillPay);
             ButtonDeleteClickCommand = new DelegateCommand(DeleteBill);
             ButtonCancelClickCommand = new DelegateCommand(BillCancel);
             ButtonDeleteEnabled = false;
+        }
+        async private void BillPay()
+        {
+            _bill.PayDate = SelectedPayDate;
+
+            await _repository.Update(_bill);
+
+            await NavigationService.GoBackAsync();
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -96,6 +123,11 @@ namespace iBillPrism.ViewModels
                 BillAmount = _bill.Amount.ToString();
                 SelectedDueDate = _bill.DueDate;
                 SelectedPayDate = _bill.PayDate;
+                ButtonPayEnabled = true;
+            }
+            else
+            {
+                ButtonPayEnabled = false;
             }
 
         }
@@ -134,26 +166,26 @@ namespace iBillPrism.ViewModels
         }
         async void BillOk()
         {
-            if (SelectedBillType == null)
-            {
-                await _pageDialogService.DisplayAlertAsync("", "The bill type can't be empty!", "OK");
-                return;
-            }
-            decimal amount = 0;
-            try
-            {
-                amount = ValidateExtractEntryAmount();
-            }
-            catch (Exception ex)
-            {
-                await _pageDialogService.DisplayAlertAsync("", ex.Message, "OK");
-                return;
-            }
+            //if (SelectedBillType == null)
+            //{
+            //    await _pageDialogService.DisplayAlertAsync("", "The bill type can't be empty!", "OK");
+            //    return;
+            //}
+            //decimal amount = 0;
+            //try
+            //{
+            //    amount = ValidateExtractEntryAmount();
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _pageDialogService.DisplayAlertAsync("", ex.Message, "OK");
+            //    return;
+            //}
             
             _bill ??= new Bill();
 
             _bill.Type = SelectedBillType;
-            _bill.Amount = amount;
+            _bill.Amount = ValidateExtractEntryAmount();
             _bill.DueDate = SelectedDueDate.AddMinutes(1439);
             _bill.PayDate = SelectedPayDate;
 
@@ -191,6 +223,7 @@ namespace iBillPrism.ViewModels
         private bool _labelAlertVisible;
         private string _labelAlertText;
         private bool _buttonOkEnabled;
+        private bool _buttonPayEnabled;
         private bool _buttonDeleteEnabled;
         private string _buttonText;
         private decimal ValidateExtractEntryAmount()
@@ -207,6 +240,7 @@ namespace iBillPrism.ViewModels
             {
                 throw new Exception("The due amount can't be negative!");
             }
+
             return amount;
         }
         private readonly IPageDialogService _pageDialogService;

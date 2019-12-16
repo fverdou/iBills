@@ -49,6 +49,7 @@ namespace iBillPrism
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();            
             containerRegistry.RegisterForNavigation<DataEntryPage, DataEntryPageViewModel>();
+
         }
     }
 }

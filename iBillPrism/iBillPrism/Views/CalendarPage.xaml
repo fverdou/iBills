@@ -10,16 +10,24 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
+            
             <Label
                 Margin="0,20,0,0"
                 FontSize="22"
                 HorizontalOptions="Center"
                 Text="Bills Calendar" />
-            <Button
-                Margin="0,10,20,0"
-                Command="{Binding ButtonAddBillClicked}"
-                HorizontalOptions="End"
-                Text="Add Bill" />
+            <Frame HasShadow="False"
+                   BackgroundColor="Transparent"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal">
+                    <Button
+                    Text="Menu" />
+                    <Button
+                    Command="{Binding ButtonAddBillClicked}"
+                    Text="Add Bill" />
+                </StackLayout>
+            </Frame>
             <ListView              
                 SelectionMode="None"
                 RowHeight="50"
