@@ -37,10 +37,9 @@ namespace iBillPrism
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            //var repo = new InMemoryRepository();            
-
+        {         
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Bills.db3");
+            //var repo = new InMemoryRepository();   
             var repo = new DbRepository(dbPath);
 
             containerRegistry.RegisterInstance<IRepository>(repo);
@@ -50,6 +49,7 @@ namespace iBillPrism
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();            
             containerRegistry.RegisterForNavigation<DataEntryPage, DataEntryPageViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
         }
     }
 }

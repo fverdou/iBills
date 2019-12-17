@@ -1,4 +1,5 @@
-﻿using iBillPrism.Contracts;
+﻿using iBillPrism.Abstractions;
+using iBillPrism.Contracts;
 using iBillPrism.Models;
 using System;
 using System.Collections.Generic;
@@ -8,43 +9,42 @@ using System.Threading.Tasks;
 
 namespace iBillPrism.Services
 {
-    class InMemoryRepository : IRepository
-    {
-        public InMemoryRepository()
-        {
-            _listOfBills.Add(new Bill { Amount = 100, Type = "Energy Bill", DueDate = DateTime.Now.AddDays(20) });
-            _listOfBills.Add(new Bill { Amount = 120, Type = "Telephone Bill", DueDate = DateTime.Now.AddDays(20) });
-            _listOfBills.Add(new Bill { Amount = 50, Type = "Cellphone Bill", DueDate = DateTime.Now.AddDays(20) });
-        }
-        public Task Add(Bill bill)
-        {
-            _listOfBills.Add(bill);
+    //class InMemoryRepository : IRepository
+    //{
+    //    public InMemoryRepository()
+    //    {
+    //        _listOfBills.Add(new Bill { Amount = 100, Type = "Energy Bill", DueDate = DateTime.Now.AddDays(20) });
+    //        _listOfBills.Add(new Bill { Amount = 120, Type = "Telephone Bill", DueDate = DateTime.Now.AddDays(20) });
+    //        _listOfBills.Add(new Bill { Amount = 50, Type = "Cellphone Bill", DueDate = DateTime.Now.AddDays(20) });
+    //        _listOfBills.Add(new BillType { Type = "Energy Bill", IsCustom = false });
+    //    }
+    //    public Task Add<T>(T entity) where T : Entity
+    //    {
+    //        _listOfBills.Add(entity);
 
-            return Task.CompletedTask;
-        }
+    //        return Task.CompletedTask;
+    //    }
+    //    public Task Update<T>(T entity) where T : Entity
+    //    {
+    //        Entity existing = _listOfBills.SingleOrDefault(x => x.Id == entity.Id);
+    //        if (existing != null)
+    //        {
+    //            existing = entity;
+    //        }
 
-        public Task Update(Bill bill)
-        {
-            Bill existing = _listOfBills.SingleOrDefault(x => x.Id == bill.Id);
-            if (existing != null)
-            {
-                existing = bill;
-            }
+    //        return Task.CompletedTask;
+    //    }
+    //    public Task<IEnumerable<T>> GetAll<T>()
+    //        where T : Entity, new()
+    //    {
+    //        return Task.FromResult<IEnumerable<Entity>>(_listOfBills);
+    //    }
+    //    public Task Remove<T>(T entity) where T : Entity
+    //    {
+    //        _listOfBills.Remove(entity);
+    //        return Task.CompletedTask;
+    //    }
 
-            return Task.CompletedTask;
-        }
-
-        public Task<IEnumerable<Bill>> GetAll()
-        {            
-            return Task.FromResult<IEnumerable<Bill>>(_listOfBills);
-        }
-
-        public Task Remove(Bill bill)
-        {
-            _listOfBills.Remove(bill);
-            return Task.CompletedTask;
-        }
-
-        private List<Bill> _listOfBills = new List<Bill>();
-    }
+    //    private List<Entity> _listOfBills = new List<Entity>();
+    //}
 }

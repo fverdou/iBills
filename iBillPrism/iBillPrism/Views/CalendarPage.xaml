@@ -10,7 +10,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            
             <Label
                 Margin="0,20,0,0"
                 FontSize="22"
@@ -21,11 +20,9 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
-                    <Button
-                    Text="Menu" />
-                    <Button
-                    Command="{Binding ButtonAddBillClicked}"
-                    Text="Add Bill" />
+                    <Button Text="Menu" />
+                    <Button Command="{Binding ButtonAddBillClicked}"
+                            Text="Add Bill" />
                 </StackLayout>
             </Frame>
             <ListView              

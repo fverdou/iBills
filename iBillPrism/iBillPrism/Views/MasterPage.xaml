@@ -16,6 +16,9 @@
                 <Button Text="Add Bill Page"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/DataEntryPage"/>
+                <Button Text="Settings Page"
+                        Command="{Binding MasterButtonClickCommand}"
+                        CommandParameter="NavigationPage/SettingsPage"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

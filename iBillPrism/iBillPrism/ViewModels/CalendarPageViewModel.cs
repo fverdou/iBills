@@ -31,13 +31,12 @@ namespace iBillPrism.ViewModels
 
             ListOfBills = new ObservableRangeCollection<Bill>();
         }
-        
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            var data = await _repository.GetAll();
+            var data = await _repository.GetAll<Bill>();
             ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
         }
 

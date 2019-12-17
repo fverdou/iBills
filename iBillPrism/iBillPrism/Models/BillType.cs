@@ -6,11 +6,9 @@ using SQLite;
 
 namespace iBillPrism.Models
 {
-    public class Bill : Entity
+    public class BillType : Entity
     {
         public string Type { get; set; }
-        public decimal Amount { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime? PayDate { get; set; }
+        public bool IsCustom { get; set; }
     }
 }
