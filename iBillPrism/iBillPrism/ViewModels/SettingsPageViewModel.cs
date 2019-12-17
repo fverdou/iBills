@@ -39,12 +39,13 @@ namespace iBillPrism.ViewModels
             //await _repository.Add(_billType);
             if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                await _repository.Add(new BillType
+                BillType billtype = new BillType
                 {
                     Type = customBillType,
                     IsCustom = true
-                });
-                await NavigationService.NavigateAsync("SettingsPage");
+                };
+                await _repository.Add(billtype);
+                ListOfBillTypes.Add(billtype);
             }
             else
             {
@@ -62,8 +63,15 @@ namespace iBillPrism.ViewModels
             bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill type?", "Yes", "No");
             if (answer)
             {
-                await _repository.Remove(b);
-                await NavigationService.NavigateAsync("SettingsPage");
+                if (b.IsCustom)
+                {
+                    await _repository.Remove(b);
+                    ListOfBillTypes.Remove(b);
+                }
+                else
+                {
+                    await _pageDialogService.DisplayAlertAsync("", "You can't delete a default bill type!", "OK");
+                }
             }
         }
 

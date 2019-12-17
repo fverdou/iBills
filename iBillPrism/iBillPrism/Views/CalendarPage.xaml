@@ -43,6 +43,7 @@
                                     <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
                                     <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
                                 </StackLayout>
+                                <!--Label Text="&#xe700 ;" FontFamily="{OnPlatform iOS=MetroStudio, Android=MetroStudio.ttf#}"/-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
