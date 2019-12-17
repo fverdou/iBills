@@ -17,7 +17,7 @@ namespace iBillPrism.Services
             _database = new SQLiteAsyncConnection(dbPath);            
             
             _database.CreateTableAsync<Bill>().Wait();
-            _database.CreateTableAsync<BillType>().Wait();            
+            _database.CreateTableAsync<BillType>().Wait();
         }
 
         readonly SQLiteAsyncConnection _database;

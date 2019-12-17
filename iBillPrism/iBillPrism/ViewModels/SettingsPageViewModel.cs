@@ -37,11 +37,19 @@ namespace iBillPrism.ViewModels
             //    Type = customBillType
             //};
             //await _repository.Add(_billType);
-            await _repository.Add(new BillType
+            if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                Type = customBillType,
-                IsCustom = true
-            });
+                await _repository.Add(new BillType
+                {
+                    Type = customBillType,
+                    IsCustom = true
+                });
+                await NavigationService.NavigateAsync("SettingsPage");
+            }
+            else
+            {
+                await _pageDialogService.DisplayAlertAsync("", "The bill type can't be empty!", "OK");
+            }
         }
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -55,7 +63,7 @@ namespace iBillPrism.ViewModels
             if (answer)
             {
                 await _repository.Remove(b);
-                //await NavigationService.NavigateAsync("SettingsPage");
+                await NavigationService.NavigateAsync("SettingsPage");
             }
         }
 
