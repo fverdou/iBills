@@ -21,10 +21,9 @@ namespace iBillPrism.ViewModels
 
         public ObservableRangeCollection<Bill> ListOfBills { get; } 
 
-        public CalendarPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IRepository repository)
+        public CalendarPageViewModel(INavigationService navigationService, IRepository repository)
             : base(navigationService)
         {
-            _pageDialogService = dialogService;
             _repository = repository;
             ButtonAddBillClicked = new DelegateCommand(AddBillCommand);
             ItemTappedCommand = new DelegateCommand<Bill>(o => ListViewTap((Bill)o));
@@ -75,7 +74,6 @@ namespace iBillPrism.ViewModels
 
         }
 
-        private readonly IPageDialogService _pageDialogService;
         private readonly IRepository _repository;
     }
 }

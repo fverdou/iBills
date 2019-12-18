@@ -77,12 +77,12 @@
                     <Button VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Command="{Binding ButtonDeleteClickCommand}"
-                        Text="Delete Bill"
+                        Text="Delete"
                         IsEnabled="{Binding ButtonDeleteEnabled}"/>
                     <Button VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Command="{Binding ButtonOkClickCommand}"
-                        Text="{Binding ButtonText}"
+                        Text="Save"
                         IsEnabled="{Binding ButtonOkEnabled}"/>
                 </StackLayout>
             </Frame>

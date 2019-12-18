@@ -11,6 +11,21 @@ namespace iBillPrism.Services
 {
     public class DbRepository : IRepository
     {
+        readonly SQLiteAsyncConnection _database;
+
+        class JoinBillAndBillType // Information Hiding!
+        {
+            public int Id { get; set; }
+            public int BillTypeId { get; set; }
+
+            public decimal Amount { get; set; }
+            public DateTime DueDate { get; set; }
+            public DateTime? PayDate { get; set; }
+
+            public string Description { get; set; }
+            public bool IsCustom { get; set; }
+        }
+
         static readonly IEnumerable<BillType> initialTable = new[] {
                     new BillType
                     {
@@ -52,8 +67,6 @@ namespace iBillPrism.Services
             }
         }
 
-        readonly SQLiteAsyncConnection _database;
-
         public Task AddBill(Bill bill)
         {
             return _database.InsertAsync(bill);
@@ -83,9 +96,13 @@ namespace iBillPrism.Services
                 Amount = x.Amount,
                 DueDate = x.DueDate,
                 PayDate = x.PayDate,
-                Type = new BillType { Id = x.BillTypeId, Description = x.Description, IsCustom = x.IsCustom }
-            })
-                .ToList();
+                Type = new BillType
+                {
+                    Id = x.BillTypeId,
+                    Description = x.Description,
+                    IsCustom = x.IsCustom
+                }
+            }).ToList();
         }
 
         public Task AddBillType(BillType billtype)

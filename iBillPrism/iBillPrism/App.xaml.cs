@@ -39,7 +39,6 @@ namespace iBillPrism
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {         
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Bills.db3");
-            //var repo = new InMemoryRepository();   
             var repo = new DbRepository(dbPath);
 
             containerRegistry.RegisterInstance<IRepository>(repo);

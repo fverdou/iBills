@@ -8,6 +8,7 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace iBillPrism.ViewModels
 {
@@ -53,11 +54,6 @@ namespace iBillPrism.ViewModels
             get => _buttonDeleteEnabled;
             set => SetProperty(ref _buttonDeleteEnabled, value);
         }
-        public string ButtonText
-        {
-            get => _buttonText;
-            set => SetProperty(ref _buttonText, value);
-        }
         public DateTime? SelectedPayDate
         {
             get => _selectedPayDate;
@@ -82,7 +78,6 @@ namespace iBillPrism.ViewModels
             _pageDialogService = dialogService;
             _repository = repository;
 
-            ButtonText = "Add Bill";
             SelectedDueDate = DateTime.Today;
             SelectedPayDate = null;
             ButtonOkClickCommand = new DelegateCommand(BillOk);
@@ -111,7 +106,6 @@ namespace iBillPrism.ViewModels
             if (parameters.ContainsKey("bill"))
             {
                 _bill = parameters.GetValue<Bill>("bill");
-                ButtonText = "Edit Bill";
 
                 ButtonDeleteEnabled = true;
 
@@ -221,7 +215,6 @@ namespace iBillPrism.ViewModels
         private bool _buttonOkEnabled;
         private bool _buttonPayEnabled;
         private bool _buttonDeleteEnabled;
-        private string _buttonText;
         private decimal ValidateExtractEntryAmount()
         {
             if (string.IsNullOrWhiteSpace(BillAmount))

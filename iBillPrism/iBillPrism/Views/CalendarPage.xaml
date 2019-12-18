@@ -42,7 +42,8 @@
                                     <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
                                     <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
                                     <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                    <Label Text="&#xe800;" x:Name="pencil" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
+                                    <Button Text="&#xe800;" x:Name="pencil" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
+                                    <Button Text="&#xe801;" x:Name="trash" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
