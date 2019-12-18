@@ -17,18 +17,32 @@ namespace iBillPrism.ViewModels
     {
 
         public DelegateCommand ButtonAddBillClicked { get; }
-        public DelegateCommand<Bill> ItemTappedCommand { get; }
+        public DelegateCommand<Bill> EditButtonCommand { get; }
+        public DelegateCommand<Bill> DeleteButtonCommand { get; }
 
         public ObservableRangeCollection<Bill> ListOfBills { get; } 
 
-        public CalendarPageViewModel(INavigationService navigationService, IRepository repository)
+        public CalendarPageViewModel(INavigationService navigationService, IRepository repository, IPageDialogService dialogService)
             : base(navigationService)
         {
+            _pageDialogService = dialogService;
             _repository = repository;
             ButtonAddBillClicked = new DelegateCommand(AddBillCommand);
-            ItemTappedCommand = new DelegateCommand<Bill>(o => ListViewTap((Bill)o));
+            EditButtonCommand = new DelegateCommand<Bill>(o => EditButtonTap(o));
+            DeleteButtonCommand = new DelegateCommand<Bill>(o => DeleteButtonTap(o));
 
             ListOfBills = new ObservableRangeCollection<Bill>();
+        }
+
+        private async void DeleteButtonTap(Bill b)
+        {
+            bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill?", "Yes", "No");
+            if (answer)
+            {
+                await _repository.RemoveBill(b);
+                var data = await _repository.GetAllBills();
+                ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
+            }
         }
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
@@ -44,7 +58,7 @@ namespace iBillPrism.ViewModels
             await NavigationService.NavigateAsync("DataEntryPage");
         }
 
-        async void ListViewTap(Bill b)
+        async void EditButtonTap(Bill b)
         {
             var parameters = new NavigationParameters();
             parameters.Add("bill", b);
@@ -75,5 +89,6 @@ namespace iBillPrism.ViewModels
         }
 
         private readonly IRepository _repository;
+        private readonly IPageDialogService _pageDialogService;
     }
 }

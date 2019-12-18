@@ -4,47 +4,54 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="iBillPrism.Views.CalendarPage">
+             x:Class="iBillPrism.Views.CalendarPage" x:Name="Page">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label
-                Margin="0,20,0,0"
-                FontSize="22"
-                HorizontalOptions="Center"
-                Text="Bills Calendar" />
-            <Frame HasShadow="False"
-                   BackgroundColor="Transparent"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center">
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Menu" />
-                    <Button Command="{Binding ButtonAddBillClicked}"
-                            Text="Add Bill" />
-                </StackLayout>
-            </Frame>
-            <ListView              
-                SelectionMode="None"
-                RowHeight="50"
-                VerticalOptions="FillAndExpand"
-                ItemsSource="{Binding ListOfBills}">
-                <ListView.Behaviors>
-                    <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
-                </ListView.Behaviors>
+            <Label Margin="0,20,0,0" FontSize="22" HorizontalOptions="Center" Text="Bills Calendar" />
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                <Button Text="Add Bill" Command="{Binding ButtonAddBillClicked}"/>
+            </StackLayout>
+            <ListView SelectionMode="None" RowHeight="60" VerticalOptions="FillAndExpand" ItemsSource="{Binding ListOfBills}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >
-                            <StackLayout Orientation="Vertical" BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
-                                <Label Text="{Binding Type.Description}" FontSize="Medium"></Label>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                    <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
-                                    <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                    <Button Text="&#xe800;" x:Name="pencil" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
-                                    <Button Text="&#xe801;" x:Name="trash" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
-                                </StackLayout>
+                            <StackLayout Orientation="Horizontal" BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
+                                <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="230">
+                                    <StackLayout>
+                                        <Label Text="{Binding Type.Description}" FontSize="Medium"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                            <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
+                                            <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                                <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="100">
+                                    <StackLayout Orientation="Horizontal" >
+                                        <Button Text="&#xe800;"
+                                                x:Name="pencil"
+                                                FontFamily="{StaticResource iBillsFont}"
+                                                FontSize="Large"
+                                                TextColor="Black"
+                                                BackgroundColor="Transparent"
+                                                WidthRequest="50"
+                                                Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
+                                                CommandParameter="{Binding .}"/>
+                                        <Button Text="&#xe801;"
+                                                x:Name="trash"
+                                                FontFamily="{StaticResource iBillsFont}"
+                                                FontSize="Large"
+                                                TextColor="Black"
+                                                BackgroundColor="Transparent"
+                                                WidthRequest="50"
+                                                Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
+                                                CommandParameter="{Binding .}"/>
+
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
