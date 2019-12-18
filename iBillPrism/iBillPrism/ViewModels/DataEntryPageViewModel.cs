@@ -11,24 +11,14 @@ using System.ComponentModel;
 
 namespace iBillPrism.ViewModels
 {
-    //public enum BillKind
-    //{
-    //    [Description("Energy Bill")]
-    //    Energy,
-    //    Gas,
-    //    Telephone,
-    //    Cellphone,
-    //    Loan,
-    //}
- 
     public class DataEntryPageViewModel : ViewModelBase
     {
-        //BillKind[] BillKinds = (BillKind[])Enum.GetValues(typeof(BillKind));
         //public List<string> BillTypes { get; set; } = new List<string>
         //{
         //    "Energy Bill", "Gas Bill", "Telephone Bill", "Cellphone Bill", "Loan bill"
         //};
-        public string SelectedBillType
+
+        public BillType SelectedBillType
         {
             get => _selectedBillType;
             set => SetProperty(ref _selectedBillType, value, () => PickerTypeSelected());
@@ -78,6 +68,9 @@ namespace iBillPrism.ViewModels
             get => _selectedDueDate; 
             set => SetProperty(ref _selectedDueDate, value); 
         }
+
+        public ObservableRangeCollection<BillType> BillTypes { get; } = new ObservableRangeCollection<BillType>();
+
         public DelegateCommand ButtonOkClickCommand { get; }
         public DelegateCommand ButtonPayClickCommand { get; }
         public DelegateCommand ButtonDeleteClickCommand { get; }
@@ -107,9 +100,12 @@ namespace iBillPrism.ViewModels
             await NavigationService.GoBackAsync();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
+
+            BillTypes.ReplaceRange(await _repository.GetAllBillTypes());
+
             // _bill = parameters["bill"] as Bill;
             // if(parameters["bill"] is Bill b) { b.Amount}
             if (parameters.ContainsKey("bill"))
@@ -216,7 +212,7 @@ namespace iBillPrism.ViewModels
             await NavigationService.GoBackAsync();
         }
 
-        private string _selectedBillType;
+        private BillType _selectedBillType;
         private string _billAmount;
         private bool pickerTypeSelected = false;
         private bool entryAmountChanged = false;

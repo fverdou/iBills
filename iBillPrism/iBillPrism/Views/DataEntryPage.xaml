@@ -15,7 +15,9 @@
             <Picker Title="Select type of bill"
                 Margin="0,20,0,0"
                 ItemsSource="{Binding BillTypes}"
-                SelectedItem="{Binding SelectedBillType}"/>
+                SelectedItem="{Binding SelectedBillType}"
+                    ItemDisplayBinding ="{Binding Description}">
+            </Picker>
             <Entry Placeholder="Enter Amount"
                 Margin="0,20,0,0" 
                 Keyboard="Numeric"

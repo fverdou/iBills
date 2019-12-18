@@ -13,9 +13,12 @@ namespace iBillPrism.Services
     {
         public InMemoryRepository()
         {
-            _listOfBills.Add(new Bill { Amount = 100, Type = "Energy Bill", DueDate = DateTime.Now.AddDays(20) });
-            _listOfBills.Add(new Bill { Amount = 120, Type = "Telephone Bill", DueDate = DateTime.Now.AddDays(20) });
-            _listOfBills.Add(new Bill { Amount = 50, Type = "Cellphone Bill", DueDate = DateTime.Now.AddDays(20) });
+            BillType billType1 = new BillType { Type = "Energy Bill", IsCustom = true };
+            BillType billType2 = new BillType { Type = "Telephone Bill", IsCustom = true };
+            BillType billType3 = new BillType { Type = "Cellphone Bill", IsCustom = true };
+            _listOfBills.Add(new Bill { Amount = 100, Type = billType1, DueDate = DateTime.Now.AddDays(20) });
+            _listOfBills.Add(new Bill { Amount = 120, Type = billType2, DueDate = DateTime.Now.AddDays(20) });
+            _listOfBills.Add(new Bill { Amount = 50, Type = billType3, DueDate = DateTime.Now.AddDays(20) });
             _listOfBillTypes.Add(new BillType { Type = "Energy Bill", IsCustom = false });
             _listOfBillTypes.Add(new BillType { Type = "Gas Bill", IsCustom = false });
             _listOfBillTypes.Add(new BillType { Type = "Telephone Bill", IsCustom = false });

@@ -41,13 +41,13 @@ namespace iBillPrism.ViewModels
             {
                 BillType billtype = new BillType
                 {
-                    Type = customBillType,
+                    Description = customBillType,
                     IsCustom = true
                 };
                 await _repository.AddBillType(billtype);
                 var data = ListOfBillTypes.ToList();
                 data.Add(billtype);
-                ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Type));
+                ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
             }
             else
             {
@@ -58,7 +58,7 @@ namespace iBillPrism.ViewModels
         {
             base.OnNavigatedTo(parameters);
             var data = await _repository.GetAllBillTypes();
-            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Type));
+            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
         }
         async void ListViewTap(BillType b)
         {

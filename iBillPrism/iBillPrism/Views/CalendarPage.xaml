@@ -37,7 +37,7 @@
                     <DataTemplate>
                         <ViewCell >
                             <StackLayout Orientation="Vertical" BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
-                                <Label Text="{Binding Type}" FontSize="Medium"></Label>
+                                <Label Text="{Binding Type.Description}" FontSize="Medium"></Label>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
                                     <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iBillPrism.Contracts;
@@ -14,33 +15,36 @@ namespace iBillPrism.Services
                     new BillType
                     {
                         IsCustom=false,
-                        Type="Energy Bill"
+                        Description="Energy Bill"
                     },
                     new BillType
                     {
                         IsCustom=false,
-                        Type="Gas Bill"
+                        Description="Gas Bill"
                     },
                     new BillType
                     {
                         IsCustom=false,
-                        Type="Telephone Bill"
+                        Description="Telephone Bill"
                     },
                     new BillType
                     {
                         IsCustom=false,
-                        Type="Cellphone Bill"
+                        Description="Cellphone Bill"
                     },
                     new BillType
                     {
                         IsCustom=false,
-                        Type="Loan Bill"
+                        Description="Loan Bill"
                     },
                 };
         public DbRepository(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
+
             _database.CreateTableAsync<Bill>().Wait();
+            _database.CreateTableAsync<BillType>().Wait();
+
             int customBills = _database.Table<BillType>().CountAsync(x => !x.IsCustom).Result;
             if (customBills == 0)
             {
@@ -64,7 +68,24 @@ namespace iBillPrism.Services
         }
         public async Task<IEnumerable<Bill>> GetAllBills()
         {
-            return await _database.Table<Bill>().ToListAsync();
+            //var bills = await _database.Table<Bill>().ToListAsync();
+            //foreach (var bill in bills)
+            //{
+            //    bill.Type = await _database.Table<BillType>().Where(x => x.Id == bill.BillTypeId).FirstAsync();
+            //}
+
+            //return bills;
+
+            var result = await _database.QueryAsync<JoinBillAndBillType>("SELECT b.Id, b.BillTypeId, b.Amount, b.DueDate, b.PayDate, bt.Description, bt.IsCustom FROM [Bill] as b INNER JOIN [BillType] as bt ON b.BillTypeId = bt.Id");
+            return result.Select(x => new Bill
+            {
+                Id = x.Id,
+                Amount = x.Amount,
+                DueDate = x.DueDate,
+                PayDate = x.PayDate,
+                Type = new BillType { Id = x.BillTypeId, Description = x.Description, IsCustom = x.IsCustom }
+            })
+                .ToList();
         }
 
         public Task AddBillType(BillType billtype)
