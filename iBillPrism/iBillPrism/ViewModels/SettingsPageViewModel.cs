@@ -44,8 +44,10 @@ namespace iBillPrism.ViewModels
                     Type = customBillType,
                     IsCustom = true
                 };
-                await _repository.Add(billtype);
-                ListOfBillTypes.Add(billtype);
+                await _repository.AddBillType(billtype);
+                var data = ListOfBillTypes.ToList();
+                data.Add(billtype);
+                ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Type));
             }
             else
             {
@@ -55,7 +57,7 @@ namespace iBillPrism.ViewModels
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            var data = await _repository.GetAll<BillType>();
+            var data = await _repository.GetAllBillTypes();
             ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Type));
         }
         async void ListViewTap(BillType b)
@@ -65,7 +67,7 @@ namespace iBillPrism.ViewModels
             {
                 if (b.IsCustom)
                 {
-                    await _repository.Remove(b);
+                    await _repository.RemoveBillType(b);
                     ListOfBillTypes.Remove(b);
                 }
                 else

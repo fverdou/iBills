@@ -42,8 +42,8 @@
                                     <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
                                     <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
                                     <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                    <Label Text="&#xe800;" x:Name="pencil" FontFamily="{StaticResource iBillsFont}" FontSize="30" TextColor="Red"/>
                                 </StackLayout>
-                                <!--Label Text="&#xe700 ;" FontFamily="{OnPlatform iOS=MetroStudio, Android=MetroStudio.ttf#}"/-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

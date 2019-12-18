@@ -26,7 +26,7 @@ namespace iBillPrism.ViewModels
         {
             _pageDialogService = dialogService;
             _repository = repository;
-            ButtonAddBillClicked = new DelegateCommand(AddBill);
+            ButtonAddBillClicked = new DelegateCommand(AddBillCommand);
             ItemTappedCommand = new DelegateCommand<Bill>(o => ListViewTap((Bill)o));
 
             ListOfBills = new ObservableRangeCollection<Bill>();
@@ -36,11 +36,11 @@ namespace iBillPrism.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            var data = await _repository.GetAll<Bill>();
+            var data = await _repository.GetAllBills();
             ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
         }
 
-        async void AddBill()
+        async void AddBillCommand()
         {         
             await NavigationService.NavigateAsync("DataEntryPage");
         }

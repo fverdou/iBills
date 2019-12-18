@@ -1,5 +1,4 @@
-﻿using iBillPrism.Abstractions;
-using iBillPrism.Models;
+﻿using iBillPrism.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +8,14 @@ namespace iBillPrism.Contracts
 {
     public interface IRepository
     {
-        Task Add<T>(T entity) where T : Entity;
-        Task Update<T>(T entity) where T : Entity;
-        Task Remove<T>(T entity) where T : Entity;
-        Task<IEnumerable<T>> GetAll<T>() where T : Entity, new();
+        Task AddBill(Bill bill);
+        Task UpdateBill(Bill bill);
+        Task RemoveBill(Bill bill);
+        Task<IEnumerable<Bill>> GetAllBills();
+
+        Task AddBillType(BillType billtype);
+        Task UpdateBillType(BillType billtype);
+        Task RemoveBillType(BillType billtype);
+        Task<IEnumerable<BillType>> GetAllBillTypes();
     }
 }

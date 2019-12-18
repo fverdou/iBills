@@ -24,10 +24,10 @@ namespace iBillPrism.ViewModels
     public class DataEntryPageViewModel : ViewModelBase
     {
         //BillKind[] BillKinds = (BillKind[])Enum.GetValues(typeof(BillKind));
-        public List<string> BillTypes { get; set; } = new List<string>
-        {
-            "Energy Bill", "Gas Bill", "Telephone Bill", "Cellphone Bill", "Loan bill"
-        };
+        //public List<string> BillTypes { get; set; } = new List<string>
+        //{
+        //    "Energy Bill", "Gas Bill", "Telephone Bill", "Cellphone Bill", "Loan bill"
+        //};
         public string SelectedBillType
         {
             get => _selectedBillType;
@@ -102,7 +102,7 @@ namespace iBillPrism.ViewModels
         {
             _bill.PayDate = SelectedPayDate;
 
-            await _repository.Update(_bill);
+            await _repository.UpdateBill(_bill);
 
             await NavigationService.GoBackAsync();
         }
@@ -191,11 +191,11 @@ namespace iBillPrism.ViewModels
 
             if (_bill.Id == 0)
             {
-                await _repository.Add(_bill);
+                await _repository.AddBill(_bill);
             }
             else
             {
-                await _repository.Update(_bill);
+                await _repository.UpdateBill(_bill);
             }
             
             await NavigationService.GoBackAsync();
@@ -205,7 +205,7 @@ namespace iBillPrism.ViewModels
             bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill?", "Yes", "No");
             if (answer)
             {
-                await _repository.Remove(_bill);
+                await _repository.RemoveBill(_bill);
                 //var data = await _repository.GetAll();
                 //ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
                 await NavigationService.GoBackAsync();
