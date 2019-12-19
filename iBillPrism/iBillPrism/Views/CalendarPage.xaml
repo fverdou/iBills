@@ -12,7 +12,7 @@
         <StackLayout>
             <Label Margin="0,20,0,0" FontSize="22" HorizontalOptions="Center" Text="Bills Calendar" />
             <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                <Button Text="Add Bill" Command="{Binding ButtonAddBillClicked}"/>
+                <Button Text="Add Bill" TextColor="DimGray" FontSize="Medium" FontAttributes="Bold" BackgroundColor="Transparent"  BorderWidth="1" BorderColor="DimGray" Command="{Binding ButtonAddBillClicked}"/>
             </StackLayout>
             <ListView SelectionMode="None" RowHeight="60" VerticalOptions="FillAndExpand" ItemsSource="{Binding ListOfBills}">
                 <ListView.ItemTemplate>
@@ -35,7 +35,7 @@
                                                 x:Name="pencil"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
-                                                TextColor="Black"
+                                                TextColor="DimGray"
                                                 BackgroundColor="Transparent"
                                                 WidthRequest="50"
                                                 Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
@@ -44,7 +44,7 @@
                                                 x:Name="trash"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
-                                                TextColor="Black"
+                                                TextColor="DimGray"
                                                 BackgroundColor="Transparent"
                                                 WidthRequest="50"
                                                 Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"

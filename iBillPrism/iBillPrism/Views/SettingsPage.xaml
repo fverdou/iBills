@@ -10,7 +10,9 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Add Custom Bill Type" Command="{Binding AddCustomBillTypeCommand}"/>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
+                <Button Text="Add Custom Bill Type" TextColor="DimGray" FontSize="Medium" FontAttributes="Bold" BackgroundColor="Transparent"  BorderWidth="1" BorderColor="DimGray" Command="{Binding AddCustomBillTypeCommand}"/>
+            </StackLayout>
             <ListView SelectionMode="None" RowHeight="50" VerticalOptions="FillAndExpand" ItemsSource="{Binding ListOfBillTypes}">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
@@ -30,7 +32,7 @@
                                                 x:Name="pencil"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
-                                                TextColor="Black"
+                                                TextColor="DimGray"
                                                 BackgroundColor="Transparent"
                                                 WidthRequest="50"
                                                 Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
@@ -40,7 +42,7 @@
                                                 x:Name="trash"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
-                                                TextColor="Black"
+                                                TextColor="DimGray"
                                                 BackgroundColor="Transparent"
                                                 WidthRequest="50"
                                                 Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"

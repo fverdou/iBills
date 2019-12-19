@@ -99,7 +99,8 @@ namespace iBillPrism.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            BillTypes.ReplaceRange(await _repository.GetAllBillTypes());
+            var data = await _repository.GetAllBillTypes();
+            BillTypes.ReplaceRange(data.OrderBy(x => x.Description));
 
             // _bill = parameters["bill"] as Bill;
             // if(parameters["bill"] is Bill b) { b.Amount}

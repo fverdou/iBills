@@ -61,8 +61,7 @@
                                 MinimumDate="01-01-2000"
                                 MaximumDate="12-31-2050"
                         TextColor="{Binding SelectedPayDate, Converter={StaticResource DateFontColor}}"/>
-                    <Button VerticalOptions="Center"
-                        HorizontalOptions="Center"
+                    <Button BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
                         Command="{Binding ButtonPayClickCommand}"
                         Text="Pay Bill" 
                         IsEnabled="{Binding ButtonPayEnabled}"/>
@@ -73,19 +72,19 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
-                    <Button VerticalOptions="Center"
+                    <Button VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
                         HorizontalOptions="Center"
                         Command="{Binding ButtonDeleteClickCommand}"
                         Text="Delete"
                         IsEnabled="{Binding ButtonDeleteEnabled}"/>
-                    <Button VerticalOptions="Center"
+                    <Button VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
                         HorizontalOptions="Center"
                         Command="{Binding ButtonOkClickCommand}"
                         Text="Save"
                         IsEnabled="{Binding ButtonOkEnabled}"/>
                 </StackLayout>
             </Frame>
-            <Button
+            <Button BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
                 Margin="0,20,0,0"
                 Command="{Binding ButtonCancelClickCommand}"
                 HorizontalOptions="Center"
