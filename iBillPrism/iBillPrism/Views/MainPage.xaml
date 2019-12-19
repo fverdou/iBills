@@ -15,11 +15,6 @@
             FontSize="22"
             HorizontalOptions="Center"
             Text="Your bills organiser" />
-        <Button
-            Margin="0,100,0,0"
-            Command="{Binding ButtonClickCommand}"
-            HorizontalOptions="Center"
-            Text="Open your bills calendar" />
     </StackLayout>
 
 

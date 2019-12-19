@@ -19,7 +19,18 @@ namespace iBillPrism.ViewModels
 
         public DelegateCommand AddCustomBillTypeCommand { get; }
         public ObservableRangeCollection<BillType> ListOfBillTypes { get; }
-        public DelegateCommand<BillType> ItemTappedCommand { get; }
+        public DelegateCommand<BillType> DeleteButtonCommand { get; }
+        public DelegateCommand<BillType> EditButtonCommand { get; }
+        public bool EditButtonVisible
+        {
+            get => _editButtonVisible;
+            set => SetProperty(ref _editButtonVisible, value);
+        }
+        public bool DeleteButtonVisible
+        {
+            get => _deleteButtonVisible;
+            set => SetProperty(ref _deleteButtonVisible, value);
+        }
         public SettingsPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IRepository repository)
             :base(navigationService)
         {
@@ -27,16 +38,34 @@ namespace iBillPrism.ViewModels
             _repository = repository;
             AddCustomBillTypeCommand = new DelegateCommand(AddCustomBillType);
             ListOfBillTypes = new ObservableRangeCollection<BillType>();
-            ItemTappedCommand = new DelegateCommand<BillType>(o => ListViewTap((BillType)o));
+            DeleteButtonCommand = new DelegateCommand<BillType>(o => DeleteButtonTap((BillType)o));
+            EditButtonCommand = new DelegateCommand<BillType>(o => EditButtonTap((BillType)o));
         }
+
+        async private void EditButtonTap(BillType o)
+        {
+            string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
+            if (!string.IsNullOrWhiteSpace(customBillType))
+            {
+                o.Description = customBillType;
+                await _repository.UpdateBillType(o);
+                UpdateList();
+            }
+            else
+            {
+                await _pageDialogService.DisplayAlertAsync("", "The bill type can't be empty!", "OK");
+            }
+        }
+
+        async private void UpdateList()
+        {
+            var data = await _repository.GetAllBillTypes();
+            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
+        }
+
         async private void AddCustomBillType()
         {
             string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
-            //var _billType = new BillType
-            //{
-            //    Type = customBillType
-            //};
-            //await _repository.Add(_billType);
             if (!string.IsNullOrWhiteSpace(customBillType))
             {
                 BillType billtype = new BillType
@@ -45,39 +74,38 @@ namespace iBillPrism.ViewModels
                     IsCustom = true
                 };
                 await _repository.AddBillType(billtype);
-                var data = ListOfBillTypes.ToList();
-                data.Add(billtype);
-                ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
+                UpdateList();
             }
             else
             {
                 await _pageDialogService.DisplayAlertAsync("", "The bill type can't be empty!", "OK");
             }
         }
-        public async override void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            var data = await _repository.GetAllBillTypes();
-            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
+            UpdateList();
         }
-        async void ListViewTap(BillType b)
+        async void DeleteButtonTap(BillType b)
         {
             bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill type?", "Yes", "No");
             if (answer)
             {
-                if (b.IsCustom)
-                {
+                //if (b.IsCustom)
+                //{
                     await _repository.RemoveBillType(b);
-                    ListOfBillTypes.Remove(b);
-                }
-                else
-                {
-                    await _pageDialogService.DisplayAlertAsync("", "You can't delete a default bill type!", "OK");
-                }
+                    UpdateList();
+                //}
+                //else
+                //{
+                //    await _pageDialogService.DisplayAlertAsync("", "You can't delete a default bill type!", "OK");
+                //}
             }
         }
 
         private IPageDialogService _pageDialogService;
+        private bool _editButtonVisible;
+        private bool _deleteButtonVisible;
         private readonly IRepository _repository;
     }
 }

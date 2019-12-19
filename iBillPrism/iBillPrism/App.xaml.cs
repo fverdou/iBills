@@ -33,7 +33,7 @@ namespace iBillPrism
         {
             InitializeComponent();
             
-            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/MainPage");            
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/CalendarPage");            
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

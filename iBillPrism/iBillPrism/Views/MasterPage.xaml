@@ -7,16 +7,13 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout>
-                <Button Text="Main Page"
-                        Command="{Binding MasterButtonClickCommand}"
-                        CommandParameter="NavigationPage/MainPage"/>
-                <Button Text="Calendar Page"
+                <Button Text="Calendar"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/CalendarPage"/>
-                <Button Text="Add Bill Page"
+                <Button Text="Add Bill"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/DataEntryPage"/>
-                <Button Text="Settings Page"
+                <Button Text="Settings"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/SettingsPage"/>
             </StackLayout>
