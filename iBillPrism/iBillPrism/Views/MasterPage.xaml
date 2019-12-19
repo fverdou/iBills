@@ -8,14 +8,33 @@
         <ContentPage Title="Menu">
             <StackLayout>
                 <Frame BackgroundColor="Transparent" HeightRequest="30"/>
-                <Button Text="Calendar" BackgroundColor="Transparent" FontSize="Medium" FontAttributes="Bold" TextColor="DimGray" BorderWidth="1" BorderColor="DimGray"
+                <Button Text="Calendar"
+                        BackgroundColor="Transparent"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="DimGray"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/CalendarPage"/>
-                <Button Text="Add Bill" BackgroundColor="Transparent" FontSize="Medium" FontAttributes="Bold" TextColor="DimGray"  BorderWidth="1" BorderColor="DimGray"
+                <Button Text="Add Bill"
+                        BackgroundColor="Transparent"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="DimGray"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/DataEntryPage"/>
-                <Frame BackgroundColor="Transparent" HeightRequest="10"/>
-                <Button Text="Settings" BackgroundColor="Transparent" FontSize="Medium" FontAttributes="Bold" TextColor="DimGray"  BorderWidth="1" BorderColor="DimGray"
+                <Frame BackgroundColor="Transparent"
+                       HeightRequest="10"/>
+                <Button Text="Settings"
+                        BackgroundColor="Transparent"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="DimGray"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
                         Command="{Binding MasterButtonClickCommand}"
                         CommandParameter="NavigationPage/SettingsPage"/>
             </StackLayout>

@@ -10,34 +10,68 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Margin="0,20,0,0" FontSize="22" HorizontalOptions="Center" Text="Bills Calendar" />
-            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                <Button Text="Add Bill" TextColor="DimGray" FontSize="Medium" FontAttributes="Bold" BackgroundColor="Transparent"  BorderWidth="1" BorderColor="DimGray" Command="{Binding ButtonAddBillClicked}"/>
+            <Label Margin="0,20,0,0"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   Text="Bills Calendar" />
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+                <Button Text="Add Bill"
+                        TextColor="DimGray"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        BackgroundColor="Transparent"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
+                        Command="{Binding ButtonAddBillClicked}"/>
             </StackLayout>
-            <ListView SelectionMode="None" RowHeight="60" VerticalOptions="FillAndExpand" ItemsSource="{Binding ListOfBills}">
+            <ListView SelectionMode="None"
+                      HasUnevenRows="True"
+                      VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding ListOfBills}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >
-                            <StackLayout Orientation="Horizontal" BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
-                                <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="230">
+                            <StackLayout Orientation="Horizontal"
+                                         BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
+                                <Frame BackgroundColor="Transparent"
+                                       Padding="0"
+                                       WidthRequest="210">
                                     <StackLayout>
-                                        <Label Text="{Binding Type.Description}" FontSize="Medium"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Type.Description}"
+                                                   FontSize="Medium"/>
+                                            <Label Text="   "/>
+                                            <Label Text="{Binding Amount, StringFormat='{0:N2}€'}"
+                                                   FontSize="Medium"/>
+                                        </StackLayout>
                                         <StackLayout Orientation="Horizontal">
                                             <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                            <Label Text="{Binding Amount, StringFormat='{0:N2}€'}" />
                                             <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
                                         </StackLayout>
                                     </StackLayout>
                                 </Frame>
-                                <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="100">
-                                    <StackLayout Orientation="Horizontal" >
+                                <Frame BackgroundColor="Transparent"
+                                       Padding="0"
+                                       WidthRequest="143">
+                                    <StackLayout Orientation="Horizontal">
                                         <Button Text="&#xe800;"
+                                                x:Name="money"
+                                                FontFamily="{StaticResource iBillsFont}"
+                                                FontSize="Large"
+                                                TextColor="DimGray"
+                                                BackgroundColor="Transparent"
+                                                WidthRequest="43"
+                                                Command="{Binding Path=BindingContext.PayButtonCommand, Source={x:Reference Page}}"
+                                                CommandParameter="{Binding .}"/>
+                                        <Button Text="&#xe802;"
                                                 x:Name="pencil"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
                                                 TextColor="DimGray"
                                                 BackgroundColor="Transparent"
-                                                WidthRequest="50"
+                                                WidthRequest="43"
                                                 Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
                                                 CommandParameter="{Binding .}"/>
                                         <Button Text="&#xe801;"
@@ -46,10 +80,9 @@
                                                 FontSize="Large"
                                                 TextColor="DimGray"
                                                 BackgroundColor="Transparent"
-                                                WidthRequest="50"
+                                                WidthRequest="43"
                                                 Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
                                                 CommandParameter="{Binding .}"/>
-
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

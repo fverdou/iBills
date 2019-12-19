@@ -45,7 +45,11 @@ namespace iBillPrism.ViewModels
         async private void EditButtonTap(BillType o)
         {
             string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
-            if (!string.IsNullOrWhiteSpace(customBillType))
+            if (customBillType == null)
+            {
+                return;
+            }
+            else if (!string.IsNullOrWhiteSpace(customBillType))
             {
                 o.Description = customBillType;
                 await _repository.UpdateBillType(o);
@@ -57,16 +61,14 @@ namespace iBillPrism.ViewModels
             }
         }
 
-        async private void UpdateList()
-        {
-            var data = await _repository.GetAllBillTypes();
-            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
-        }
-
         async private void AddCustomBillType()
         {
             string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
-            if (!string.IsNullOrWhiteSpace(customBillType))
+            if (customBillType == null)
+            {
+                return;
+            }
+            else if (!string.IsNullOrWhiteSpace(customBillType))
             {
                 BillType billtype = new BillType
                 {
@@ -101,6 +103,11 @@ namespace iBillPrism.ViewModels
                 //    await _pageDialogService.DisplayAlertAsync("", "You can't delete a default bill type!", "OK");
                 //}
             }
+        }
+        async private void UpdateList()
+        {
+            var data = await _repository.GetAllBillTypes();
+            ListOfBillTypes.ReplaceRange(data.OrderBy(x => x.Description));
         }
 
         private IPageDialogService _pageDialogService;

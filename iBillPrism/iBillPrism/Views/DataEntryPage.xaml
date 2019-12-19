@@ -12,20 +12,21 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Picker Title="Select type of bill" Margin="0,20,0,0"
+            <Picker Title="Select type of bill"
+                    Margin="0,20,0,0"
                     ItemsSource="{Binding BillTypes}"
-                SelectedItem="{Binding SelectedBillType}"
+                    SelectedItem="{Binding SelectedBillType}"
                     ItemDisplayBinding ="{Binding Description}">
             </Picker>
             <Entry Placeholder="Enter Amount"
-                Margin="0,20,0,0" 
-                Keyboard="Numeric"
-                Text="{Binding BillAmount}"/>
+                   Margin="0,20,0,0" 
+                   Keyboard="Numeric"
+                   Text="{Binding BillAmount}"/>
             <Label Margin="5,0,0,0"
-                TextColor="Red"
-                FontSize="Small"
-                IsVisible="{Binding LabelAlertVisible}"
-                Text="{Binding LabelAlertText}"/>
+                   TextColor="Red"
+                   FontSize="Small"
+                   IsVisible="{Binding LabelAlertVisible}"
+                   Text="{Binding LabelAlertText}"/>
             <Frame HasShadow="False"
                    BackgroundColor="Transparent"
                    VerticalOptions="Center"
@@ -53,18 +54,22 @@
                            HorizontalOptions="Center"
                            Text="Pay Date:"
                            FontSize="Medium"/>
-                    <DatePicker 
-                                VerticalOptions="Center"
+                    <DatePicker VerticalOptions="Center"
                                 HorizontalOptions="Center"
                                 Date="{Binding SelectedPayDate}" 
                                 Format="dd-MM-yyyy"
                                 MinimumDate="01-01-2000"
                                 MaximumDate="12-31-2050"
-                        TextColor="{Binding SelectedPayDate, Converter={StaticResource DateFontColor}}"/>
-                    <Button BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
-                        Command="{Binding ButtonPayClickCommand}"
-                        Text="Pay Bill" 
-                        IsEnabled="{Binding ButtonPayEnabled}"/>
+                                TextColor="{Binding SelectedPayDate, Converter={StaticResource DateFontColor}}"/>
+                    <Button BackgroundColor="Transparent"
+                            BorderColor="DimGray"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            TextColor="DimGray"
+                            Command="{Binding ButtonPayClickCommand}"
+                            Text="Pay Bill" 
+                            IsEnabled="{Binding ButtonPayEnabled}"/>
                 </StackLayout>
             </Frame>
             <Frame HasShadow="False"
@@ -72,23 +77,40 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
-                    <Button VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
-                        HorizontalOptions="Center"
-                        Command="{Binding ButtonDeleteClickCommand}"
-                        Text="Delete"
-                        IsEnabled="{Binding ButtonDeleteEnabled}"/>
-                    <Button VerticalOptions="Center" BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
-                        HorizontalOptions="Center"
-                        Command="{Binding ButtonOkClickCommand}"
-                        Text="Save"
-                        IsEnabled="{Binding ButtonOkEnabled}"/>
+                    <Button VerticalOptions="Center"
+                            BackgroundColor="Transparent"
+                            BorderColor="DimGray"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            TextColor="DimGray"
+                            HorizontalOptions="Center"
+                            Command="{Binding ButtonDeleteClickCommand}"
+                            Text="Delete"
+                            IsEnabled="{Binding ButtonDeleteEnabled}"/>
+                    <Button VerticalOptions="Center"
+                            BackgroundColor="Transparent"
+                            BorderColor="DimGray"
+                            BorderWidth="1"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            TextColor="DimGray"
+                            HorizontalOptions="Center"
+                            Command="{Binding ButtonOkClickCommand}"
+                            Text="Save"
+                            IsEnabled="{Binding ButtonOkEnabled}"/>
                 </StackLayout>
             </Frame>
-            <Button BackgroundColor="Transparent" BorderColor="DimGray" BorderWidth="1" FontAttributes="Bold" FontSize="Medium" TextColor="DimGray"
-                Margin="0,20,0,0"
-                Command="{Binding ButtonCancelClickCommand}"
-                HorizontalOptions="Center"
-                Text="Cancel" />
+            <Button BackgroundColor="Transparent"
+                    BorderColor="DimGray"
+                    BorderWidth="1"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    TextColor="DimGray"
+                    Margin="0,20,0,0"
+                    Command="{Binding ButtonCancelClickCommand}"
+                    HorizontalOptions="Center"
+                    Text="Cancel" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

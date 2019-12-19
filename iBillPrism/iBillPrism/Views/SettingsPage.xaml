@@ -10,25 +10,44 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                <Button Text="Add Custom Bill Type" TextColor="DimGray" FontSize="Medium" FontAttributes="Bold" BackgroundColor="Transparent"  BorderWidth="1" BorderColor="DimGray" Command="{Binding AddCustomBillTypeCommand}"/>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+                <Button Text="Add Custom Bill Type"
+                        TextColor="DimGray"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        BackgroundColor="Transparent"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
+                        Command="{Binding AddCustomBillTypeCommand}"/>
             </StackLayout>
-            <ListView SelectionMode="None" RowHeight="50" VerticalOptions="FillAndExpand" ItemsSource="{Binding ListOfBillTypes}">
+            <ListView SelectionMode="None"
+                      RowHeight="50"
+                      VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding ListOfBillTypes}">
                 <ListView.Behaviors>
-                    <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
+                    <prism:EventToCommandBehavior EventName="ItemTapped"
+                                                  EventArgsParameterPath="Item"
+                                                  Command="{Binding ItemTappedCommand}"/>
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >
                             <StackLayout Orientation="Horizontal">
-                                <Frame BackgroundColor="Transparent" Padding="10" WidthRequest="210">
+                                <Frame BackgroundColor="Transparent"
+                                       Padding="10"
+                                       WidthRequest="210">
                                     <StackLayout>
-                                        <Label Text="{Binding Description}" FontSize="Medium"/>
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Description}"/>
                                     </StackLayout>
                                 </Frame>
-                                <Frame BackgroundColor="Transparent" Padding="0" WidthRequest="100">
+                                <Frame BackgroundColor="Transparent"
+                                       Padding="0"
+                                       WidthRequest="100">
                                     <StackLayout Orientation="Horizontal" >
-                                        <Button Text="&#xe800;"
+                                        <Button Text="&#xe802;"
                                                 x:Name="pencil"
                                                 FontFamily="{StaticResource iBillsFont}"
                                                 FontSize="Large"
