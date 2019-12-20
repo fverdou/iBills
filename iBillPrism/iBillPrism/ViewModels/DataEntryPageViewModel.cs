@@ -188,7 +188,8 @@ namespace iBillPrism.ViewModels
             {
                 await _repository.UpdateBill(_bill);
             }
-            
+            await _pageDialogService.DisplayAlertAsync("", "Bill was saved", "OK");
+            //await NavigationService.NavigateAsync("CalendarPage");
             await NavigationService.GoBackAsync();
         }
         async void DeleteBill()

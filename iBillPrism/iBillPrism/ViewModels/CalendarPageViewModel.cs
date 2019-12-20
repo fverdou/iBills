@@ -7,6 +7,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,22 +17,35 @@ namespace iBillPrism.ViewModels
     public class CalendarPageViewModel : ViewModelBase
     {
 
-        public DelegateCommand ButtonAddBillClicked { get; }
+        //public DelegateCommand ButtonAddBillClicked { get; }
         public DelegateCommand<Bill> EditButtonCommand { get; }
         public DelegateCommand<Bill> DeleteButtonCommand { get; }
-
-        public ObservableRangeCollection<Bill> ListOfBills { get; } 
+        //public ObservableRangeCollection<Bill> ListOfBills { get; }
+        public ObservableRangeCollection<BillsGroup> ListOfBills { get; }
 
         public CalendarPageViewModel(INavigationService navigationService, IRepository repository, IPageDialogService dialogService)
             : base(navigationService)
         {
             _pageDialogService = dialogService;
             _repository = repository;
-            ButtonAddBillClicked = new DelegateCommand(AddBillCommand);
+            //ButtonAddBillClicked = new DelegateCommand(AddBillCommand);
             EditButtonCommand = new DelegateCommand<Bill>(o => EditButtonTap(o));
             DeleteButtonCommand = new DelegateCommand<Bill>(o => DeleteButtonTap(o));
 
-            ListOfBills = new ObservableRangeCollection<Bill>();
+            //ListOfBills = new ObservableRangeCollection<Bill>();
+            ListOfBills = new ObservableRangeCollection<BillsGroup>();
+        }
+        public async override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            var data = await _repository.GetAllBills();
+            //ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
+            ListOfBills.ReplaceRange(
+                data
+                .GroupBy(x => x.DueDate)
+                .OrderBy(x => x.Key)
+                .Select(x => new BillsGroup(x.Key, x.ToList())));
         }
 
         private async void DeleteButtonTap(Bill b)
@@ -41,22 +55,19 @@ namespace iBillPrism.ViewModels
             {
                 await _repository.RemoveBill(b);
                 var data = await _repository.GetAllBills();
-                ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
+                //ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
+                ListOfBills.ReplaceRange(
+                data
+                .GroupBy(x => x.DueDate)
+                .OrderBy(x => x.Key)
+                .Select(x => new BillsGroup(x.Key, x.ToList())));
             }
         }
 
-        public async override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            var data = await _repository.GetAllBills();
-            ListOfBills.ReplaceRange(data.OrderBy(x => x.DueDate));
-        }
-
-        async void AddBillCommand()
-        {         
-            await NavigationService.NavigateAsync("DataEntryPage");
-        }
+        //async void AddBillCommand()
+        //{         
+        //    await NavigationService.NavigateAsync("DataEntryPage");
+        //}
 
         async void EditButtonTap(Bill b)
         {

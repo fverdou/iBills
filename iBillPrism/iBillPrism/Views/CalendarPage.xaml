@@ -10,26 +10,32 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Margin="0,20,0,0"
-                   FontSize="22"
-                   HorizontalOptions="Center"
-                   Text="Bills Calendar" />
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="Center"
                          HorizontalOptions="Center">
-                <Button Text="Add Bill"
+                <!--Button Text="Add Bill"
                         TextColor="DimGray"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         BackgroundColor="Transparent"
                         BorderWidth="1"
                         BorderColor="DimGray"
-                        Command="{Binding ButtonAddBillClicked}"/>
+                        Command="{Binding ButtonAddBillClicked}"/-->
             </StackLayout>
             <ListView SelectionMode="None"
                       HasUnevenRows="True"
                       VerticalOptions="FillAndExpand"
-                      ItemsSource="{Binding ListOfBills}">
+                      ItemsSource="{Binding ListOfBills}"
+                      IsGroupingEnabled="true">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Heading, StringFormat='{0:dd-MM-yyyy}'}" 
+                                   FontSize="Large"
+                                   FontAttributes="Bold"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >

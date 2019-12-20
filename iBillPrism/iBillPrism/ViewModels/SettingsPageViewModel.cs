@@ -51,9 +51,17 @@ namespace iBillPrism.ViewModels
             }
             else if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                o.Description = customBillType;
-                await _repository.UpdateBillType(o);
-                UpdateList();
+                if (customBillType.Length < 17)
+                {
+                    o.Description = customBillType;
+                    await _repository.UpdateBillType(o);
+                    UpdateList();
+                }
+                else
+                {
+                    await _pageDialogService.DisplayAlertAsync("", "Bill type name can't be longer than 16 characters", "OK");
+                    return;
+                }
             }
             else
             {
@@ -70,13 +78,21 @@ namespace iBillPrism.ViewModels
             }
             else if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                BillType billtype = new BillType
+                if (customBillType.Length < 17)
                 {
-                    Description = customBillType,
-                    IsCustom = true
-                };
-                await _repository.AddBillType(billtype);
-                UpdateList();
+                    BillType billtype = new BillType
+                    {
+                        Description = customBillType,
+                        IsCustom = true
+                    };
+                    await _repository.AddBillType(billtype);
+                    UpdateList();
+                }
+                else
+                {
+                    await _pageDialogService.DisplayAlertAsync("", "Bill type name can't be longer than 16 characters", "OK");
+                    return;
+                }
             }
             else
             {
