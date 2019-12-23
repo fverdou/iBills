@@ -26,7 +26,10 @@
                       HasUnevenRows="True"
                       VerticalOptions="FillAndExpand"
                       ItemsSource="{Binding ListOfBills}"
-                      IsGroupingEnabled="true">
+                      IsGroupingEnabled="true"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -6,8 +6,9 @@
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="iBillPrism.Views.TabbedPage">
     <TabbedPage.Children>
-        <local:CalendarOverdue />
-        <local:CalendarPending />
-        <local:CalendarPaid />
+        <local:CalendarPage Title="Calendar" />
+        <local:CalendarOverdue Title="Overdue"/>
+        <local:CalendarPending Title="Pending"/>
+        <local:CalendarPaid Title="Paid"/>
     </TabbedPage.Children>
 </TabbedPage>

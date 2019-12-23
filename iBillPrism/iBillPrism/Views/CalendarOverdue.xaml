@@ -5,8 +5,7 @@
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="iBillPrism.Views.CalendarOverdue" 
-             x:Name="OverduePage"
-             Title="Overdue">
+             x:Name="OverduePage">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>

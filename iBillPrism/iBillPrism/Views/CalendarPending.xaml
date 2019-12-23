@@ -4,8 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="iBillPrism.Views.CalendarPending" x:Name="PendingPage"
-             Title="Pending">
+             x:Class="iBillPrism.Views.CalendarPending" x:Name="PendingPage">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>

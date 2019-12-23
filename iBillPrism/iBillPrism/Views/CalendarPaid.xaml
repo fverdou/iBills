@@ -4,8 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="iBillPrism.Views.CalendarPaid" x:Name="PaidPage"
-             Title="Paid">
+             x:Class="iBillPrism.Views.CalendarPaid" x:Name="PaidPage">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>
