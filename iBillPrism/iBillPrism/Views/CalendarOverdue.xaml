@@ -6,7 +6,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="iBillPrism.Views.CalendarOverdue" 
              x:Name="OverduePage"
-             Title="OVERDUE">
+             Title="Overdue">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>
@@ -28,7 +28,10 @@
                       HasUnevenRows="True"
                       VerticalOptions="FillAndExpand"
                       ItemsSource="{Binding ListOfBills}"
-                      IsGroupingEnabled="true">
+                      IsGroupingEnabled="True"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>

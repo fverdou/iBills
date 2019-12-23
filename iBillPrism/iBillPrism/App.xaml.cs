@@ -20,8 +20,7 @@ namespace iBillPrism
         {
             "Energy Bill", "Gas Bill", "Telephone Bill", "Cellphone Bill", "Loan bill"
         };
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
+         /* The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
@@ -33,7 +32,7 @@ namespace iBillPrism
         {
             InitializeComponent();
             
-            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/CalendarPage");            
+            await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabbedPage");            
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

@@ -8,7 +8,7 @@
         <ContentPage Title="Menu">
             <StackLayout>
                 <Frame BackgroundColor="Transparent" HeightRequest="30"/>
-                <Button Text="Tabs"
+                <!--<Button Text="Tabs"
                         BackgroundColor="Transparent"
                         FontSize="Medium"
                         FontAttributes="Bold"
@@ -16,7 +16,7 @@
                         BorderWidth="1"
                         BorderColor="DimGray"
                         Command="{Binding MasterButtonClickCommand}"
-                        CommandParameter="NavigationPage/TabbedPage"/>
+                        CommandParameter="NavigationPage/TabbedPage"/>-->
                 <Button Text="Calendar"
                         BackgroundColor="Transparent"
                         FontSize="Medium"
@@ -25,7 +25,7 @@
                         BorderWidth="1"
                         BorderColor="DimGray"
                         Command="{Binding MasterButtonClickCommand}"
-                        CommandParameter="NavigationPage/CalendarPage"/>
+                        CommandParameter="NavigationPage/TabbedPage"/>
                 <Button Text="Add Bill"
                         BackgroundColor="Transparent"
                         FontSize="Medium"

@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="iBillPrism.Views.CalendarPending" x:Name="PendingPage">
+             x:Class="iBillPrism.Views.CalendarPending" x:Name="PendingPage"
+             Title="Pending">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>
@@ -26,7 +27,10 @@
                       HasUnevenRows="True"
                       VerticalOptions="FillAndExpand"
                       ItemsSource="{Binding ListOfBills}"
-                      IsGroupingEnabled="true">
+                      IsGroupingEnabled="true"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>

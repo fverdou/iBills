@@ -9,12 +9,19 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace iBillPrism.ViewModels
 {
     public class CalendarPaidViewModel : ViewModelBase, IActiveAware
     {
         public event EventHandler IsActiveChanged;
+        public DelegateCommand RefreshCommand { get; }
+        public DelegateCommand<Bill> EditButtonCommand { get; }
+        public DelegateCommand<Bill> DeleteButtonCommand { get; }
+        public ObservableRangeCollection<BillsGroup> ListOfBills { get; }
         public bool IsActive
         {
             get => _isActive;
@@ -24,44 +31,33 @@ namespace iBillPrism.ViewModels
         private void RaiseIsActiveChanged()
         {
             IsActiveChanged?.Invoke(this, EventArgs.Empty);
-            RefreshData();
+            RefreshCommand.Execute();
         }
-        private bool _isActive;
-        public DelegateCommand<Bill> EditButtonCommand { get; }
-        public DelegateCommand<Bill> DeleteButtonCommand { get; }
-        public ObservableRangeCollection<BillsGroup> ListOfBills { get; }
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set => SetProperty(ref _isRefreshing, value);
+        }
         public CalendarPaidViewModel(INavigationService navigationService, IRepository repository, IPageDialogService dialogService)
             : base(navigationService)
         {
             _pageDialogService = dialogService;
             _repository = repository;
             EditButtonCommand = new DelegateCommand<Bill>(o => EditButtonTap(o));
-            DeleteButtonCommand = new DelegateCommand<Bill>(o => DeleteButtonTap(o));
+            DeleteButtonCommand = new DelegateCommand<Bill>(async o => await DeleteButtonTap(o));
+            RefreshCommand = new DelegateCommand(async () => await RefreshData());
 
             ListOfBills = new ObservableRangeCollection<BillsGroup>();
         }
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            RefreshData();
+            RefreshCommand.Execute();
         }
-        private async void RefreshData()
+        private async Task RefreshData()
         {
-            var data = await _repository.GetAllBills();
-            data = data.Where(x => x.PayDate != null);
-            ListOfBills.ReplaceRange(
-                data
-                .GroupBy(x => x.DueDate)
-                .OrderBy(x => x.Key)
-                .Select(x => new BillsGroup(x.Key, x.ToList())));
-        }
-
-        private async void DeleteButtonTap(Bill b)
-        {
-            bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill?", "Yes", "No");
-            if (answer)
+            try
             {
-                await _repository.RemoveBill(b);
                 var data = await _repository.GetAllBills();
                 data = data.Where(x => x.PayDate != null);
                 ListOfBills.ReplaceRange(
@@ -69,6 +65,24 @@ namespace iBillPrism.ViewModels
                 .GroupBy(x => x.DueDate)
                 .OrderBy(x => x.Key)
                 .Select(x => new BillsGroup(x.Key, x.ToList())));
+            }
+            catch (Exception exception)
+            {
+                await _pageDialogService.DisplayAlertAsync("Error !!", exception.Message, "Ok");
+            }
+            finally
+            {
+                IsRefreshing = false;
+            }
+        }
+
+        private async Task DeleteButtonTap(Bill b)
+        {
+            bool answer = await _pageDialogService.DisplayAlertAsync(null, "Are you sure you want to delete this bill?", "Yes", "No");
+            if (answer)
+            {
+                await _repository.RemoveBill(b);
+                await RefreshData();
             }
         }
 
@@ -81,5 +95,7 @@ namespace iBillPrism.ViewModels
         }
         private readonly IRepository _repository;
         private readonly IPageDialogService _pageDialogService;
+        private bool _isActive;
+        private bool _isRefreshing = false;
     }
 }
