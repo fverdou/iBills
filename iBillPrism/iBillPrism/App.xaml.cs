@@ -49,6 +49,10 @@ namespace iBillPrism
             containerRegistry.RegisterForNavigation<DataEntryPage, DataEntryPageViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+            containerRegistry.RegisterForNavigation<Views.TabbedPage, TabbedPageViewModel>();
+            containerRegistry.RegisterForNavigation<CalendarPending, CalendarPendingViewModel>();
+            containerRegistry.RegisterForNavigation<CalendarPaid, CalendarPaidViewModel>();
+            containerRegistry.RegisterForNavigation<CalendarOverdue, CalendarOverdueViewModel>();
         }
     }
 }

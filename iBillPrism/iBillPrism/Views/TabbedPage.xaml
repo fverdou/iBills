@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            xmlns:local="clr-namespace:iBillPrism.Views"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            x:Class="iBillPrism.Views.TabbedPage">
+    <NavigationPage Title="Overdue">
+        <x:Arguments>
+            <local:CalendarOverdue/>
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Pending">
+        <x:Arguments>
+            <local:CalendarPending/>
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Paid">
+        <x:Arguments>
+            <local:CalendarPaid/>
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>

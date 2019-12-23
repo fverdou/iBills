@@ -8,6 +8,15 @@
         <ContentPage Title="Menu">
             <StackLayout>
                 <Frame BackgroundColor="Transparent" HeightRequest="30"/>
+                <Button Text="Tabs"
+                        BackgroundColor="Transparent"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="DimGray"
+                        BorderWidth="1"
+                        BorderColor="DimGray"
+                        Command="{Binding MasterButtonClickCommand}"
+                        CommandParameter="NavigationPage/TabbedPage"/>
                 <Button Text="Calendar"
                         BackgroundColor="Transparent"
                         FontSize="Medium"
