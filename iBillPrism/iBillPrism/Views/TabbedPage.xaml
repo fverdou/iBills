@@ -5,19 +5,9 @@
             xmlns:local="clr-namespace:iBillPrism.Views"
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="iBillPrism.Views.TabbedPage">
-    <NavigationPage Title="Overdue">
-        <x:Arguments>
-            <local:CalendarOverdue/>
-        </x:Arguments>
-    </NavigationPage>
-    <NavigationPage Title="Pending">
-        <x:Arguments>
-            <local:CalendarPending/>
-        </x:Arguments>
-    </NavigationPage>
-    <NavigationPage Title="Paid">
-        <x:Arguments>
-            <local:CalendarPaid/>
-        </x:Arguments>
-    </NavigationPage>
+    <TabbedPage.Children>
+        <local:CalendarOverdue />
+        <local:CalendarPending />
+        <local:CalendarPaid />
+    </TabbedPage.Children>
 </TabbedPage>
