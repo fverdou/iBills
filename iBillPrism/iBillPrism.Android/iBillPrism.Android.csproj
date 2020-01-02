@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\ibillsfont.ttf" />
+    <AndroidAsset Include="Assets\materialdesignicons-webfont.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

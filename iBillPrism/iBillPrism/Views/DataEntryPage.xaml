@@ -5,7 +5,6 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-              
              x:Class="iBillPrism.Views.DataEntryPage">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="DateFontColor"/>
@@ -33,7 +32,6 @@
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
                     <Label VerticalOptions="Center"
-                           HorizontalOptions="Center"
                            Text="Due Date:"
                            FontSize="Medium"/>
                     <DatePicker 
@@ -51,7 +49,6 @@
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
                     <Label VerticalOptions="Center"
-                           HorizontalOptions="Center"
                            Text="Pay Date:"
                            FontSize="Medium"/>
                     <DatePicker VerticalOptions="Center"
@@ -61,12 +58,7 @@
                                 MinimumDate="01-01-2000"
                                 MaximumDate="12-31-2050"
                                 TextColor="{Binding SelectedPayDate, Converter={StaticResource DateFontColor}}"/>
-                    <Button BackgroundColor="Transparent"
-                            BorderColor="DimGray"
-                            BorderWidth="1"
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            TextColor="DimGray"
+                    <Button Style="{StaticResource genericButtonsStyle}"
                             Command="{Binding ButtonPayClickCommand}"
                             Text="Pay Bill" 
                             IsEnabled="{Binding ButtonPayEnabled}"/>
@@ -77,39 +69,18 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal">
-                    <Button VerticalOptions="Center"
-                            BackgroundColor="Transparent"
-                            BorderColor="DimGray"
-                            BorderWidth="1"
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            TextColor="DimGray"
-                            HorizontalOptions="Center"
+                    <Button Style="{StaticResource genericButtonsStyle}"
                             Command="{Binding ButtonDeleteClickCommand}"
                             Text="Delete"
                             IsEnabled="{Binding ButtonDeleteEnabled}"/>
-                    <Button VerticalOptions="Center"
-                            BackgroundColor="Transparent"
-                            BorderColor="DimGray"
-                            BorderWidth="1"
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            TextColor="DimGray"
-                            HorizontalOptions="Center"
+                    <Button Style="{StaticResource genericButtonsStyle}"
                             Command="{Binding ButtonOkClickCommand}"
                             Text="Save"
                             IsEnabled="{Binding ButtonOkEnabled}"/>
                 </StackLayout>
             </Frame>
-            <Button BackgroundColor="Transparent"
-                    BorderColor="DimGray"
-                    BorderWidth="1"
-                    FontAttributes="Bold"
-                    FontSize="Medium"
-                    TextColor="DimGray"
-                    Margin="0,20,0,0"
+            <Button Style="{StaticResource genericButtonsStyle}"
                     Command="{Binding ButtonCancelClickCommand}"
-                    HorizontalOptions="Center"
                     Text="Cancel" />
         </StackLayout>
     </ContentPage.Content>

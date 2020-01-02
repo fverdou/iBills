@@ -14,12 +14,7 @@
                          VerticalOptions="Center"
                          HorizontalOptions="Center">
                 <Button Text="Add Custom Bill Type"
-                        TextColor="DimGray"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        BackgroundColor="Transparent"
-                        BorderWidth="1"
-                        BorderColor="DimGray"
+                        Style="{StaticResource genericButtonsStyle}"
                         Command="{Binding AddCustomBillTypeCommand}"/>
             </StackLayout>
             <ListView SelectionMode="None"
@@ -37,7 +32,7 @@
                             <StackLayout Orientation="Horizontal">
                                 <Frame BackgroundColor="Transparent"
                                        Padding="10"
-                                       WidthRequest="210">
+                                       WidthRequest="260">
                                     <StackLayout>
                                         <Label FontSize="Medium"
                                                Text="{Binding Description}"/>
@@ -49,21 +44,13 @@
                                     <StackLayout Orientation="Horizontal" >
                                         <Button Text="&#xe802;"
                                                 x:Name="pencil"
-                                                FontFamily="{StaticResource iBillsFont}"
-                                                FontSize="Large"
-                                                TextColor="DimGray"
-                                                BackgroundColor="Transparent"
-                                                WidthRequest="50"
+                                                Style="{StaticResource billsButtonsStyle}"
                                                 Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
                                                 CommandParameter="{Binding .}"
                                                 IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>
                                         <Button Text="&#xe801;"
                                                 x:Name="trash"
-                                                FontFamily="{StaticResource iBillsFont}"
-                                                FontSize="Large"
-                                                TextColor="DimGray"
-                                                BackgroundColor="Transparent"
-                                                WidthRequest="50"
+                                                Style="{StaticResource billsButtonsStyle}"
                                                 Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
                                                 CommandParameter="{Binding .}"
                                                 IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>

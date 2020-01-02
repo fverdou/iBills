@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace iBillPrism.ViewModels
 {
@@ -188,6 +189,7 @@ namespace iBillPrism.ViewModels
             {
                 await _repository.UpdateBill(_bill);
             }
+            await Task.Delay(5000);
             await _pageDialogService.DisplayAlertAsync("", "Bill was saved", "OK");
             //await NavigationService.NavigateAsync("CalendarPage");
             await NavigationService.GoBackAsync();

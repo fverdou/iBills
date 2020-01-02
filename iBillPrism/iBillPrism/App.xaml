@@ -3,13 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              x:Class="iBillPrism.App">
-	<Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
 
-		<!-- Application resource dictionary -->
-        <OnPlatform x:Key="iBillsFont" x:TypeArguments="x:String">
-            <On Platform="Android" Value="ibillsfont.ttf#fontello" />
-            <On Platform="iOS" Value="ibillsfont" />
-        </OnPlatform>
+            <OnPlatform x:Key="iBillsFont" x:TypeArguments="x:String">
+                <On Platform="Android" Value="ibillsfont.ttf#fontello" />
+                <On Platform="iOS" Value="ibillsfont" />
+            </OnPlatform>
 
+            <OnPlatform x:Key="Material" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Material Design Icons" />
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf" />
+            </OnPlatform>
+
+            <Style x:Key="baseButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="DimGray" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="genericButtonsStyle"
+                    TargetType="Button"
+                    ApplyToDerivedTypes="True"
+                    CanCascade="True"
+                    BasedOn="{StaticResource baseButtonStyle}">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderColor" Value="DimGray" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            
+            <Style x:Key="billsButtonsStyle"
+                    TargetType="Button"
+                    ApplyToDerivedTypes="True"
+                    CanCascade="True"
+                    BasedOn="{StaticResource baseButtonStyle}">
+                <Setter Property="FontFamily" Value="{StaticResource iBillsFont}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="WidthRequest" Value="43" />
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

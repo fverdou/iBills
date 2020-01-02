@@ -34,6 +34,7 @@ namespace iBillPrism
             
             await NavigationService.NavigateAsync("/MasterPage/NavigationPage/TabbedPage");            
         }
+        
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {         

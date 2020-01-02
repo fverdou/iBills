@@ -42,14 +42,14 @@ namespace iBillPrism.Abstractions
         {
             _pageDialogService = dialogService;
             _repository = repository;
-            EditButtonCommand = new DelegateCommand<Bill>(o => EditButtonTap(o));
+            EditButtonCommand = new DelegateCommand<Bill>(async o => await EditButtonTap(o));
             DeleteButtonCommand = new DelegateCommand<Bill>(async o => await DeleteButtonTap(o));
             RefreshCommand = new DelegateCommand(async () => await RefreshData());
 
             ListOfBills = new ObservableRangeCollection<BillsGroup>();
         }
 
-        public async override void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             RefreshCommand.Execute();
@@ -86,11 +86,11 @@ namespace iBillPrism.Abstractions
             }
         }
 
-        async void EditButtonTap(Bill b)
+        async Task EditButtonTap(Bill b)
         {
             var parameters = new NavigationParameters();
             parameters.Add("bill", b);
-            await navigationService.NavigateAsync("DataEntryPage", parameters);
+            await NavigationService.NavigateAsync("DataEntryPage", parameters);
 
         }
         private readonly IRepository _repository;
@@ -98,5 +98,25 @@ namespace iBillPrism.Abstractions
         private bool _isActive;
         private bool _isRefreshing = false;
         private INavigationService navigationService;
+    }
+
+    public abstract class Point
+    {
+        int x;
+        int y;
+
+        public Point(int X, int Y)
+        {
+
+        }
+    }
+
+    public class CartesianPoint : Point
+    {
+        public CartesianPoint(int X, int Y)
+            :base(X,Y)
+        {
+
+        }
     }
 }

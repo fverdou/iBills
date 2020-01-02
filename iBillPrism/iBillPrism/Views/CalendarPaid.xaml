@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:iBillPrism.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="iBillPrism.Views.CalendarPaid" x:Name="PaidPage">
+             x:Class="iBillPrism.Views.CalendarPaid"
+             x:Name="PaidPage">
     <ContentPage.Resources>
         <converters:BillToColorBrushConverter x:Key="BillToColorBrush"/>
     </ContentPage.Resources>
@@ -67,29 +68,17 @@
                                     <StackLayout Orientation="Horizontal">
                                         <Button Text="&#xe800;"
                                                 x:Name="money"
-                                                FontFamily="{StaticResource iBillsFont}"
-                                                FontSize="Large"
-                                                TextColor="DimGray"
-                                                BackgroundColor="Transparent"
-                                                WidthRequest="43"
+                                                Style="{StaticResource billsButtonsStyle}"
                                                 Command="{Binding Path=BindingContext.PayButtonCommand, Source={x:Reference PaidPage}}"
                                                 CommandParameter="{Binding .}"/>
                                         <Button Text="&#xe802;"
                                                 x:Name="pencil"
-                                                FontFamily="{StaticResource iBillsFont}"
-                                                FontSize="Large"
-                                                TextColor="DimGray"
-                                                BackgroundColor="Transparent"
-                                                WidthRequest="43"
+                                                Style="{StaticResource billsButtonsStyle}"
                                                 Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference PaidPage}}"
                                                 CommandParameter="{Binding .}"/>
                                         <Button Text="&#xe801;"
                                                 x:Name="trash"
-                                                FontFamily="{StaticResource iBillsFont}"
-                                                FontSize="Large"
-                                                TextColor="DimGray"
-                                                BackgroundColor="Transparent"
-                                                WidthRequest="43"
+                                                Style="{StaticResource billsButtonsStyle}"
                                                 Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference PaidPage}}"
                                                 CommandParameter="{Binding .}"/>
                                     </StackLayout>
