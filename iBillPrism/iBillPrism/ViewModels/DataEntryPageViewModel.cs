@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace iBillPrism.ViewModels
 {
@@ -64,6 +65,11 @@ namespace iBillPrism.ViewModels
         { 
             get => _selectedDueDate; 
             set => SetProperty(ref _selectedDueDate, value); 
+        }
+        public bool ActivityIndicatorRunning
+        {
+            get => _activityIndicatorRunning;
+            set => SetProperty(ref _activityIndicatorRunning, value);
         }
 
         public ObservableRangeCollection<BillType> BillTypes { get; } = new ObservableRangeCollection<BillType>();
@@ -189,8 +195,15 @@ namespace iBillPrism.ViewModels
             {
                 await _repository.UpdateBill(_bill);
             }
-            await Task.Delay(5000);
+            ActivityIndicatorRunning = true;
+            await Task.Delay(2000);
+            ActivityIndicatorRunning = false;
             await _pageDialogService.DisplayAlertAsync("", "Bill was saved", "OK");
+            SelectedBillType = null;
+            BillAmount = null;
+            LabelAlertVisible = false;
+            SelectedDueDate = DateTime.Today;
+            SelectedPayDate = null;
             //await NavigationService.NavigateAsync("CalendarPage");
             await NavigationService.GoBackAsync();
         }
@@ -241,5 +254,6 @@ namespace iBillPrism.ViewModels
         private Bill _bill;
         private DateTime? _selectedPayDate;
         private DateTime _selectedDueDate;
+        private bool _activityIndicatorRunning;
     }
 }

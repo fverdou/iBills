@@ -24,8 +24,6 @@
 
             <Style x:Key="genericButtonsStyle"
                     TargetType="Button"
-                    ApplyToDerivedTypes="True"
-                    CanCascade="True"
                     BasedOn="{StaticResource baseButtonStyle}">
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="BorderWidth" Value="1" />
@@ -35,8 +33,6 @@
             
             <Style x:Key="billsButtonsStyle"
                     TargetType="Button"
-                    ApplyToDerivedTypes="True"
-                    CanCascade="True"
                     BasedOn="{StaticResource baseButtonStyle}">
                 <Setter Property="FontFamily" Value="{StaticResource iBillsFont}" />
                 <Setter Property="FontSize" Value="Large" />

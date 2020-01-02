@@ -79,6 +79,7 @@
                             IsEnabled="{Binding ButtonOkEnabled}"/>
                 </StackLayout>
             </Frame>
+            <ActivityIndicator IsRunning="{Binding ActivityIndicatorRunning}" />
             <Button Style="{StaticResource genericButtonsStyle}"
                     Command="{Binding ButtonCancelClickCommand}"
                     Text="Cancel" />
