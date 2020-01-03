@@ -29,35 +29,31 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell >
-                            <StackLayout Orientation="Horizontal">
+                            <AbsoluteLayout>
                                 <StackLayout BackgroundColor="Transparent"
-                                       Padding="10"
-                                       WidthRequest="260">
-                                    <StackLayout>
-                                        <Label FontSize="Medium"
-                                               Text="{Binding Description}"/>
-                                    </StackLayout>
+                                             Padding="10">
+                                    <Label FontSize="Medium"
+                                           Text="{Binding Description}"/>
                                 </StackLayout>
                                 <StackLayout BackgroundColor="Transparent"
                                        Padding="0"
-                                       WidthRequest="100">
-                                    <StackLayout Orientation="Horizontal" >
-                                        <Button Text="&#xe802;"
-                                                x:Name="pencil"
-                                                Style="{StaticResource billsButtonsStyle}"
-                                                Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
-                                                CommandParameter="{Binding .}"
-                                                IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>
-                                        <Button Text="&#xe801;"
-                                                x:Name="trash"
-                                                Style="{StaticResource billsButtonsStyle}"
-                                                Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
-                                                CommandParameter="{Binding .}"
-                                                IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>
-
-                                    </StackLayout>
+                                       WidthRequest="100"
+                                        Orientation="Horizontal"
+                                        AbsoluteLayout.LayoutBounds="250,0,AutoSize,AutoSize">
+                                    <Button Text="&#xe802;"
+                                            x:Name="pencil"
+                                            Style="{StaticResource billsButtonsStyle}"
+                                            Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding .}"
+                                            IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>
+                                    <Button Text="&#xe801;"
+                                            x:Name="trash"
+                                            Style="{StaticResource billsButtonsStyle}"
+                                            Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding .}"
+                                            IsVisible="{Binding ., Converter={StaticResource SettingsButtonsVisibility}}"/>
                                 </StackLayout>
-                            </StackLayout>
+                            </AbsoluteLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
