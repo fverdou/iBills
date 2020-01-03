@@ -36,7 +36,6 @@
                                            Text="{Binding Description}"/>
                                 </StackLayout>
                                 <StackLayout BackgroundColor="Transparent"
-                                       Padding="0"
                                        WidthRequest="100"
                                         Orientation="Horizontal"
                                         AbsoluteLayout.LayoutBounds="250,0,AutoSize,AutoSize">
