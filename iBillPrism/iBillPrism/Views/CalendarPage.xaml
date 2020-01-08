@@ -33,44 +33,39 @@
                         <ViewCell >
                             <StackLayout Orientation="Horizontal"
                                          BackgroundColor="{Binding ., Converter={StaticResource BillToColorBrush}}">
-                                <Frame BackgroundColor="Transparent"
-                                       Padding="0"
+                                <StackLayout BackgroundColor="Transparent"
                                        WidthRequest="210">
-                                    <StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Type.Description}"
-                                                   FontSize="Medium"/>
-                                            <Label Text="   "/>
-                                            <Label Text="{Binding Amount, StringFormat='{0:N2}€'}"
-                                                   FontSize="Medium"/>
-                                        </StackLayout>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                            <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
-                                        </StackLayout>
-                                    </StackLayout>
-                                </Frame>
-                                <Frame BackgroundColor="Transparent"
-                                       Padding="0"
-                                       WidthRequest="143">
                                     <StackLayout Orientation="Horizontal">
-                                        <Button Text="&#xe800;"
-                                                x:Name="money"
-                                                Style="{StaticResource billsButtonsStyle}"
-                                                Command="{Binding Path=BindingContext.PayButtonCommand, Source={x:Reference Page}}"
-                                                CommandParameter="{Binding .}"/>
-                                        <Button Text="&#xe802;"
-                                                x:Name="pencil"
-                                                Style="{StaticResource billsButtonsStyle}"
-                                                Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
-                                                CommandParameter="{Binding .}"/>
-                                        <Button Text="&#xe801;"
-                                                x:Name="trash"
-                                                Style="{StaticResource billsButtonsStyle}"
-                                                Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
-                                                CommandParameter="{Binding .}"/>
+                                        <Label Text="{Binding Type.Description}"
+                                                FontSize="Medium"/>
+                                        <Label Text="   "/>
+                                        <Label Text="{Binding Amount, StringFormat='{0:N2}€'}"
+                                                FontSize="Medium"/>
                                     </StackLayout>
-                                </Frame>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                        <Label Text="{Binding PayDate, StringFormat='{0:dd-MM-yyyy}'}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout BackgroundColor="Transparent"
+                                             WidthRequest="143"
+                                             Orientation="Horizontal">
+                                    <Button Text="&#xe800;"
+                                            x:Name="money"
+                                            Style="{StaticResource billsButtonsStyle}"
+                                            Command="{Binding Path=BindingContext.PayButtonCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding .}"/>
+                                    <Button Text="&#xe802;"
+                                            x:Name="pencil"
+                                            Style="{StaticResource billsButtonsStyle}"
+                                            Command="{Binding Path=BindingContext.EditButtonCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding .}"/>
+                                    <Button Text="&#xe801;"
+                                            x:Name="trash"
+                                            Style="{StaticResource billsButtonsStyle}"
+                                            Command="{Binding Path=BindingContext.DeleteButtonCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding .}"/>
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
