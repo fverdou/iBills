@@ -44,24 +44,16 @@ namespace iBillPrism.ViewModels
 
         async private void EditButtonTap(BillType o)
         {
-            string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
+            string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "", maxLength: 16);
             if (customBillType == null)
             {
                 return;
             }
             else if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                if (customBillType.Length < 17)
-                {
                     o.Description = customBillType;
                     await _repository.UpdateBillType(o);
                     UpdateList();
-                }
-                else
-                {
-                    await _pageDialogService.DisplayAlertAsync("", "Bill type name can't be longer than 16 characters", "OK");
-                    return;
-                }
             }
             else
             {
@@ -71,28 +63,20 @@ namespace iBillPrism.ViewModels
 
         async private void AddCustomBillType()
         {
-            string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "");
+            string customBillType = await Page.DisplayPromptAsync("Type Custom Bill Type", "", maxLength: 16);
             if (customBillType == null)
             {
                 return;
             }
             else if (!string.IsNullOrWhiteSpace(customBillType))
             {
-                if (customBillType.Length < 17)
+                BillType billtype = new BillType
                 {
-                    BillType billtype = new BillType
-                    {
-                        Description = customBillType,
-                        IsCustom = true
-                    };
-                    await _repository.AddBillType(billtype);
-                    UpdateList();
-                }
-                else
-                {
-                    await _pageDialogService.DisplayAlertAsync("", "Bill type name can't be longer than 16 characters", "OK");
-                    return;
-                }
+                    Description = customBillType,
+                    IsCustom = true
+                };
+                await _repository.AddBillType(billtype);
+                UpdateList();
             }
             else
             {

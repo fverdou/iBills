@@ -12,8 +12,8 @@
             </OnPlatform>
 
             <OnPlatform x:Key="Material" x:TypeArguments="x:String">
-                <On Platform="iOS" Value="Material Design Icons" />
                 <On Platform="Android" Value="materialdesignicons-webfont.ttf" />
+                <On Platform="iOS" Value="Material Design Icons" />
             </OnPlatform>
 
             <Style x:Key="baseButtonStyle" TargetType="Button">
